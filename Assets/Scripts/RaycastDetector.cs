@@ -16,7 +16,7 @@ public class VisibleRaycast : MonoBehaviour
         lineRenderer.startWidth = 0.05f;
         lineRenderer.endWidth = 0.05f;
         lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
-        lineRenderer.material.color = Color.red;  // ·¹ÀÌÀú »ö»ó
+        lineRenderer.material.color = Color.red;  // ë ˆì´ì € ìƒ‰ìƒ
     }
 
     void Update()
@@ -32,18 +32,26 @@ public class VisibleRaycast : MonoBehaviour
         {
             endPoint = hit.point;
 
-            if (hit.collider.CompareTag("Player"))
+            try
             {
-                Debug.Log("ÇÃ·¹ÀÌ¾î ¸íÁß!");
-                // °¨Áö ÈÄ Çàµ¿ Ãß°¡ °¡´É
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log("í”Œë ˆì´ì–´ ëª…ì¤‘!");
+                    // ê°ì§€ í›„ í–‰ë™ ì¶”ê°€ ê°€ëŠ¥
+                }
             }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Error: " + e.Message);
+            }
+            
         }
         else
         {
             endPoint = origin + direction * rayDistance;
         }
 
-        // ·¹ÀÌÀú¸¦ ´«¿¡ º¸ÀÌ°Ô ±×¸²
+        // ë ˆì´ì €ë¥¼ ëˆˆì— ë³´ì´ê²Œ ê·¸ë¦¼
         lineRenderer.SetPosition(0, origin);
         lineRenderer.SetPosition(1, endPoint);
     }

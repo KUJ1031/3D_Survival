@@ -13,6 +13,7 @@ public interface IDamageable
 public class PlayerCondition : MonoBehaviour, IDamageable
 {
     public UICondition uiCondition;
+    public SavePoint point;
 
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
@@ -28,6 +29,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     {
         playerController = CharacterManager.Instance.Player.controller;
         renderer = GetComponentInChildren<Renderer>();
+        point = FindObjectOfType<SavePoint>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         float originalSpeed = playerController.moveSpeed;
         float boostedSpeed = originalSpeed + amount;
 
-        // ¼Óµµ Áõ°¡
+        // ì†ë„ ì¦ê°€
         playerController.moveSpeed = boostedSpeed;
     }
     public void PermanentJumpPowerUp(float amount)
@@ -71,7 +73,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         float originalJumpPower = playerController.jumpPower;
         float boostedJumpPower = originalJumpPower + amount;
 
-        // ¼Óµµ Áõ°¡
+        // ì†ë„ ì¦ê°€
         playerController.jumpPower = boostedJumpPower;
     }
     public void ResetSpeed()
@@ -93,13 +95,13 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         float originalSpeed = playerController.moveSpeed;
         float boostedSpeed = originalSpeed + amount;
 
-        // ¼Óµµ Áõ°¡
+        // ì†ë„ ì¦ê°€
         playerController.moveSpeed = boostedSpeed;
 
-        // 5ÃÊ ´ë±â
+        // 5ì´ˆ ëŒ€ê¸°
         yield return new WaitForSeconds(duration);
 
-        // Á¡ÁøÀûÀ¸·Î ¿ø·¡ ¼Óµµ·Î º¹±Í (0.5ÃÊ µ¿¾È)
+        // ì ì§„ì ìœ¼ë¡œ ì›ë˜ ì†ë„ë¡œ ë³µê·€ (0.5ì´ˆ ë™ì•ˆ)
         float elapsed = 0f;
         float transitionTime = 0.5f;
 
@@ -110,13 +112,13 @@ public class PlayerCondition : MonoBehaviour, IDamageable
             yield return null;
         }
 
-        // º¸Á¤
+        // ë³´ì •
         playerController.moveSpeed = originalSpeed;
     }
 
     public bool CheckDoubleJumpEnable(float time)
     {
-        Debug.Log($"´õºí Á¡ÇÁ°¡ + {time}ÃÊ¸¸Å­ È°¼ºÈ­µÇ¾ú½À´Ï´Ù.");
+        Debug.Log($"ë”ë¸” ì í”„ê°€ + {time}ì´ˆë§Œí¼ í™œì„±í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
         StartCoroutine(ResetDoubleJumpAfterTime(time));
         playerController.doubleJumpTime = true;
         return playerController.doubleJumpTime;
@@ -125,7 +127,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     private IEnumerator ResetDoubleJumpAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        Debug.Log("Double Jump Time: Á¾·á");
+        Debug.Log("Double Jump Time: ì¢…ë£Œ");
         playerController.doubleJumpTime = false;
     }
 
@@ -133,7 +135,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     {
         if (!playerController.isInvincible)
         {
-            Debug.Log($"¹«ÀûÀÌ + {time}ÃÊ¸¸Å­ È°¼ºÈ­µÇ¾ú½À´Ï´Ù.");
+            Debug.Log($"ë¬´ì ì´ + {time}ì´ˆë§Œí¼ í™œì„±í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
             StartCoroutine(InvincibilityCoroutine(time));
         }
            
@@ -144,12 +146,19 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         playerController.isInvincible = true;
 
         yield return new WaitForSeconds(time);
-        Debug.Log($"{time}ÃÊ°¡ Áö³ª ¹«Àû ½Ã°£ÀÌ ºñÈ°¼ºÈ­µÇ¾ú½À´Ï´Ù.");
+        Debug.Log($"{time}ì´ˆê°€ ì§€ë‚˜ ë¬´ì  ì‹œê°„ì´ ë¹„í™œì„±í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
         playerController.isInvincible = false;
     }
     public void Die()
     {
         Debug.Log("Player is dead");
+        Respawn();
+    }
+
+    public void Respawn()
+    {
+       // Debug.Log($"Player Respawn : {CharacterManager.Instance.Player.transform.position}");
+        CharacterManager.Instance.Player.transform.position = point.savePoint;
     }
 
     public void TakePhysicalDamage(int damage)
