@@ -8,8 +8,8 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
-    public float defaultSpeed = 5f;
+    public float moveSpeed = 8f;
+    public float defaultSpeed = 8f;
 
     public float beforeJumpPower = 80f;
     public float afterJumpPower = 240f;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool canDoubleJump = false;
     public bool doubleJumpTime = false;
     public bool isInvincible = false;
-    public bool movementLocked = false; // ¿ÜºÎ¿¡¼­ Á¦¾î °¡´É
+    public bool movementLocked = false; // ì™¸ë¶€ì—ì„œ ì œì–´ ê°€ëŠ¥
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         if (movementLocked)
             return;
 
-        Move(); // ±âÁ¸ ÀÌµ¿ ÄÚµå
+        Move(); // ê¸°ì¡´ ì´ë™ ì½”ë“œ
     }
 
     private void LateUpdate()
@@ -101,12 +101,12 @@ public class PlayerController : MonoBehaviour
             if (IsGrounded())
             {
                 Jump();
-                canDoubleJump = true; // ¶¥¿¡¼­ Á¡ÇÁÇßÀ¸´Ï ´õºíÁ¡ÇÁ °¡´É »óÅÂ·Î ¸¸µê
+                canDoubleJump = true; // ë•…ì—ì„œ ì í”„í–ˆìœ¼ë‹ˆ ë”ë¸”ì í”„ ê°€ëŠ¥ ìƒíƒœë¡œ ë§Œë“¦
             }
             else if (canDoubleJump && doubleJumpTime)
             {
                 Jump();
-                canDoubleJump = false; // ´õºíÁ¡ÇÁ ¼ÒÁø
+                canDoubleJump = false; // ë”ë¸”ì í”„ ì†Œì§„
             }
         }
     }
