@@ -17,6 +17,8 @@ MonoBehaviour:
   type: 2
   icon: {fileID: 21300000, guid: e61976ceaf6919c47853f5a7ea09288b, type: 3}
   dropPrefab: {fileID: 553035987803133170, guid: 188d64a257cb1e14c9516597b5308e79, type: 3}
-  canStack: 1
-  maxStackAmount: 12
+  canStack: 0
+  maxStackAmount: 0
   cousumables: []
+  equipables: []
+  equipPrefab: {fileID: 0}
