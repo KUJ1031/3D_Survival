@@ -19,14 +19,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject); // 중복된 인스턴스는 파괴
         }
     }
-    public void GameStart()
+    private void Start()
     {
         Time.timeScale = 1f; // 게임 시작
+    }
+    public void GameStart()
+    {
         SceneManager.LoadScene("MainScene"); // 게임 씬 로드
     }
     public void GameEnd()
     {
         Cursor.lockState = CursorLockMode.None;
+        UIManager.instance.SetActiveGameClearedImage();
         Time.timeScale = 0f; // 게임 일시 정지
     }
 
