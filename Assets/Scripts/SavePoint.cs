@@ -5,7 +5,7 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour
 {
     Player player;
-    public Vector3 savePoint;
+    internal Vector3 savePoint;
     private float marginY = 3f;
 
     private void OnCollisionEnter(Collision collision)
@@ -23,6 +23,8 @@ public class SavePoint : MonoBehaviour
     }
     public void UpdatedSavePoint()
     {
+        CharacterManager.Instance.Player.condition.Saved();
         savePoint = CharacterManager.Instance.Player.transform.localPosition;
+        UIManager.instance.SettrueGameSavedText();
     }
 }

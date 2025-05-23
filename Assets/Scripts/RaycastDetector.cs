@@ -37,6 +37,8 @@ public class VisibleRaycast : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     Debug.Log("플레이어 명중!");
+                    PlayerCondition playerCondition = hit.collider.GetComponent<PlayerCondition>();
+                    playerCondition.Die();
                     // 감지 후 행동 추가 가능
                 }
             }

@@ -45,7 +45,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
 
         if (health.curValue <= 0f)
         {
-            Die();
+            GameManager.Instance.GameEnd();
         }
 
     }
@@ -58,6 +58,11 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     public void Eat(float amount)
     {
         hunger.Add(amount);
+    }
+
+    public void Saved()
+    {
+        hunger.Add(hunger.maxValue);
     }
 
     public void PermanentSpeedUp(float amount)
