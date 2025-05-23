@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Item_Ax
   m_EditorClassIdentifier: 
   displayName: "\uB3C4\uB07C"
-  description: "\uC790\uC6D0\uC744 \uCC44\uCDE8\uD560 \uB54C \uC0AC\uC6A9\uD569\uB2C8\uB2E4."
+  description: "\uC7A5\uCC29\uD558\uB294 \uAC83\uB9CC\uC73C\uB85C \uC810\uD504\uB825\uC774
+    \uB192\uC544\uC9D1\uB2C8\uB2E4. \u203B \uAC8C\uC784\uC774 \uC5B4\uB824\uC6B8
+    \uB54C\uB9CC \uC0AC\uC6A9\uD558\uC138\uC694."
   type: 0
   icon: {fileID: 21300000, guid: 06e8d836c76eb494db7ab3784ffcb0eb, type: 3}
   dropPrefab: {fileID: 5855185374095938468, guid: 2d4519acb48c2354ebcf13b0126f3e2a, type: 3}
@@ -22,5 +24,5 @@ MonoBehaviour:
   cousumables: []
   equipables:
   - type: 1
-    value: 250
+    value: 30
   equipPrefab: {fileID: 3961567072262558640, guid: bcc420c751917d4448ca1cf17c1f12d6, type: 3}
