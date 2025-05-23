@@ -10,7 +10,6 @@ public class GameCleared : MonoBehaviour
         {
             // 게임 클리어 UI를 활성화하는 코드
             Debug.Log("Game Cleared!");
-            UIManager.instance.SetActiveGameClearedImage();
             GameManager.Instance.GameEnd(); // 게임 종료
         }
     }
